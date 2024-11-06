@@ -1,42 +1,63 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  --button-color: rgb(231, 64, 64);
+  --border-color: #eae8e8;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar {
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.RegButton button {
+  border: 0;
+  background-color: rgb(231, 64, 64);
+  color: white;
+  font-size: 16px;
+  outline: 0;
+  padding: 10px;
+  border-radius: 10px;
 }
 
-.card {
-  padding: 2em;
+.mainContent {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  height: 83vh;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
 }
 
-.read-the-docs {
-  color: #888;
+
+.mainContent::-webkit-scrollbar {
+  display: none;
+}
+
+.ListElement {
+  display: flex;
+  border:1px solid var(--border-color);
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 7px;
+  width: 85vw;
+  margin-bottom: 10px;
+}
+
+.EditButton {
+  background-color: var(--button-color);
+  display: inline-block;
+  padding: 7px 12px 7px 12px;
+  color: white;
+  border-radius: 10px;
 }
