@@ -1,8 +1,11 @@
 import React from "react";
 import ListElement from "./ListElement";
+import SearchBar from "./SearchBar";
 
 const AdminListBody = () => {
   return <div className="mainContent">
+    <SearchBar/>
+    <div>
     <ListElement/>
     <ListElement/>
     <ListElement/>
@@ -19,6 +22,7 @@ const AdminListBody = () => {
     <ListElement/>
     <ListElement/>
     <ListElement/>
+    </div>
   </div>;
 };
 

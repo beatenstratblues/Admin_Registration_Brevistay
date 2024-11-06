@@ -1,6 +1,6 @@
 :root {
   --button-color: rgb(69, 157, 234);
-  --border-color: #eae8e8;
+  --border-color: #d1d0d0;
 }
 
 .navbar {
@@ -58,10 +58,12 @@
 .EditButton {
   background-color: var(--button-color);
   display: inline-block;
+  width: 50px;
   padding: 7px 12px 7px 12px;
   color: white;
   border-radius: 10px;
   cursor: pointer;
+  text-align: center;
 }
 
 .regisModal {
@@ -83,7 +85,7 @@
   background-color: white;
   width: 40vw;
   border-radius: 15px;
-  box-shadow: 3px 10px 7px lightgrey;
+  box-shadow: 3px 5px 5px lightgrey;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -92,15 +94,17 @@
 
 input {
   border: none;
-  border: 1px solid var(--border-color);
+  border: 1.5px solid var(--border-color);
   font-size: 16px;
   padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f5f5;
 }
 
 .regisForm button {
   background-color: var(--button-color);
   display: inline-block;
-  padding: 7px 12px 7px 12px;
+  padding: 10px;
   color: white;
   border-radius: 5px;
   border: none;
