@@ -1,12 +1,18 @@
 const express = require("express");
+const cors = require('cors');
 const { sequelize, properties, Admins } = require("./models");
-const { json } = require("sequelize");
+const { json, where } = require("sequelize");
+
 
 const app = express();
+
 app.use(express.json())
+app.use(cors({origin: "http://localhost:5173"}));
+
 
 app.post("/api/admins", async (req, res) => {
-  const { Name, email, contact } = req.body;
+  const { Name, email, contact, assignedProperties } = req.body;
+
   try {
     await Admins.create({ Name, email, contact });
     return res.json({
@@ -14,7 +20,6 @@ app.post("/api/admins", async (req, res) => {
       status: "Success",
     });
   } catch (err) {
-    console.log(err);
     return res.status(400).json({
       message: "Failure to post the data",
       status: "Fail",
@@ -23,6 +28,7 @@ app.post("/api/admins", async (req, res) => {
 });
 
 app.get("/api/admins", (req, res) => {
+
   return res.json("adminRegistration");
 });
 
@@ -30,14 +36,29 @@ app.get("/api/admins/search", (req, res) => {
   return res.json("adminRegistration");
 });
 
-app.get("/api/properties", async (req, res) => {
+app.get("/api/properties/:fetchType", async (req, res) => {
+
   try {
-    const Properties_data = await properties.findAll();
-    return res.json({
-      properties_data: Properties_data,
-      message: "Data fetched successfully",
-      status: "Success",
-    });
+    if(req.params.fetchType==="all") {
+        const Properties_data = await properties.findAll();
+        return res.json({
+          properties_data: Properties_data,
+          message: "Data fetched successfully",
+          status: "Success",
+        });
+    }
+    else if(req.params.fetchType==="unadmin") {
+        const Properties_data = await properties.findAll({
+            where: {
+                admin_id: null
+            }
+        });
+        return res.json({
+          properties_data: Properties_data,
+          message: "Data fetched successfully",
+          status: "Success",
+        });
+    }
   } catch (err) {
     return (
       res.status(400),
