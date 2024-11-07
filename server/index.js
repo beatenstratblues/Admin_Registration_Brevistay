@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require('cors');
 const { sequelize, properties, Admins } = require("./models");
-const { json, where } = require("sequelize");
+const { json, where, Op} = require("sequelize");
 
 
 const app = express();
@@ -13,18 +13,40 @@ app.use(cors({origin: "http://localhost:5173"}));
 app.post("/api/admins", async (req, res) => {
   const { Name, email, contact, assignedProperties } = req.body;
 
+  let recentlyAddedId;
+
   try {
-    await Admins.create({ Name, email, contact });
-    return res.json({
-      message: "Data posted successfully",
-      status: "Success",
-    });
+
+    recentlyAddedId = await Admins.create({ Name, email, contact });
+
   } catch (err) {
     return res.status(400).json({
-      message: "Failure to post the data",
+      message: "Failure to post the data, error in details",
       status: "Fail",
     });
   }
+
+  try {
+    await properties.update({admin_id : recentlyAddedId.dataValues.uuid }, {
+      where: {
+        name : {
+          [Op.in] : assignedProperties
+        }
+      }
+    });
+    
+    return res.json({
+      message: "Admin Successfully added",
+      status: "Success", 
+    })
+  } catch(err) {
+    return res.status(400).json({
+        message: "Failure to post the data, error in property selection",
+        status: "Fail",
+      });
+  }
+
+
 });
 
 app.get("/api/admins", (req, res) => {
