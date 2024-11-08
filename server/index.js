@@ -101,6 +101,10 @@ app.get("/api/admins/search", (req, res) => {
   return res.json("adminRegistration");
 });
 
+app.delete("/api/admins/:id", async (req, res) => {
+  return res.json("adminRegistration");
+});
+
 
 app.get("/api/properties/:fetchType", async (req, res) => {
 
