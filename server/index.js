@@ -101,7 +101,39 @@ app.get("/api/admins/search", (req, res) => {
   return res.json("adminRegistration");
 });
 
+
 app.delete("/api/admins/:id", async (req, res) => {
+
+  const uuid = req.params.id;
+
+  try {
+    await Admins.destroy({
+      where: {
+        uuid
+      }
+    });
+
+    await properties.update({
+      admin_id:null,
+    },{
+      where: {
+        admin_id:uuid,
+      }
+    })
+
+    return res.json({
+      message: "Record deleted successfully",
+      status: "Success",
+    })
+  }
+  catch(err) {
+    return res.status(400).json({
+      message: "Failed to delete the record",
+      status: "Fail",
+    });
+  }
+
+
   return res.json("adminRegistration");
 });
 
