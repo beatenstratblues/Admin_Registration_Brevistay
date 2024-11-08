@@ -1,7 +1,8 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ListElement = ({ elementData }) => {
+
   const navigate = useNavigate();
 
   return (
@@ -12,9 +13,14 @@ const ListElement = ({ elementData }) => {
       <div>
         <div className="EditButton">Edit</div>
         &nbsp; &nbsp;
-        <Link to={`/property/${elementData.uuid}`}>
-          <div className="EditButton">View</div>
-        </Link>
+        <div
+          className="EditButton"
+          onClick={() => {
+            navigate(`/property/${elementData.uuid}`);
+          }}
+        >
+          View
+        </div>
         &nbsp; &nbsp;
         <div className="EditButton" style={{ backgroundColor: "red" }}>
           Delete

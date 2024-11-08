@@ -8,7 +8,7 @@ const AdminListBody = () => {
 
   useEffect(()=>{
     async function adminFetch() {
-      await fetch("http://localhost:8000/api/admins").then(res=>{
+      await fetch("http://localhost:8000/api/admins?uuid=all").then(res=>{
         if(res.ok) {
           res.json().then(data=>{
             setAdminData(data.admin_data);

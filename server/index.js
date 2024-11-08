@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require('cors');
 const { sequelize, properties, Admins } = require("./models");
-const { json, Op} = require("sequelize");
+const { json, Op, where} = require("sequelize");
 
 
 const app = express();
@@ -51,20 +51,42 @@ app.post("/api/admins", async (req, res) => {
 
 app.get("/api/admins", async (req, res) => {
 
-  try {
-    const adminData = await Admins.findAll({
-      include: [
-        {
-          model:properties,
-        }
-      ]
-    });
+  const {uuid} = req.query;
 
-    return res.json({
-      admin_data : adminData,
-      message: "Data Loaded Successfully",
-      status: "Success",
-    });
+  try {
+    if(uuid==="all") {
+      const adminData = await Admins.findAll({
+        include: [
+          {
+            model:properties,
+          }
+        ]
+      });
+  
+      return res.json({
+        admin_data : adminData,
+        message: "Data Loaded Successfully",
+        status: "Success",
+      });
+    }
+    else {
+      const adminData = await Admins.findAll({
+        where: {
+          uuid
+        },
+        include: [
+          {
+            model:properties,
+          }
+        ]
+      });
+  
+      return res.json({
+        admin_data : adminData,
+        message: "Data Loaded Successfully",
+        status: "Success",
+      });
+    }
   }
   catch(err) {
     return res.status(400).json({

@@ -133,9 +133,22 @@ input {
   height: 100vh;
 }
 
-.propViewPage div {
+.propViewPage .propViewCont {
   background-color: white;
   width: 50vw;
   height: 85vh;
   overflow-y: scroll;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pvElement {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+  border: 1.3px solid var(--border-color);
+  border-radius: 5px;
 }
