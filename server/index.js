@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require('cors');
 const { sequelize, properties, Admins } = require("./models");
-const { json, where, Op} = require("sequelize");
+const { json, Op} = require("sequelize");
 
 
 const app = express();
@@ -20,6 +20,7 @@ app.post("/api/admins", async (req, res) => {
     recentlyAddedId = await Admins.create({ Name, email, contact });
 
   } catch (err) {
+    console.log(err);
     return res.status(400).json({
       message: "Failure to post the data, error in details",
       status: "Fail",
@@ -45,18 +46,39 @@ app.post("/api/admins", async (req, res) => {
         status: "Fail",
       });
   }
-
-
 });
 
-app.get("/api/admins", (req, res) => {
 
-  return res.json("adminRegistration");
+app.get("/api/admins", async (req, res) => {
+
+  try {
+    const adminData = await Admins.findAll({
+      include: [
+        {
+          model:properties,
+        }
+      ]
+    });
+
+    return res.json({
+      admin_data : adminData,
+      message: "Data Loaded Successfully",
+      status: "Success",
+    });
+  }
+  catch(err) {
+    return res.status(400).json({
+      message: "Failure to load admin data",
+      status: "Fail",
+    });
+  }
+
 });
 
 app.get("/api/admins/search", (req, res) => {
   return res.json("adminRegistration");
 });
+
 
 app.get("/api/properties/:fetchType", async (req, res) => {
 

@@ -50,7 +50,7 @@
   border:1px solid var(--border-color);
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px 60px;
   border-radius: 7px;
   width: 85vw;
   margin-bottom: 10px;
@@ -124,4 +124,18 @@ input {
 .shimmer div {
   color: var(--button-color);
   font-size: xx-large;
+}
+
+.propViewPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.propViewPage div {
+  background-color: white;
+  width: 50vw;
+  height: 85vh;
+  overflow-y: scroll;
 }

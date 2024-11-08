@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Multiselect from 'multiselect-react-dropdown';
 import ShimmerPage from './ShimmerPage';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationPage = () => {
   const [hotelData, setHotelData] = useState();
@@ -9,6 +10,7 @@ const RegistrationPage = () => {
   const [contact,setContact] = useState();
 
   const [assignProp,setAssignProp] = useState();
+  const navigate = useNavigate();
 
   async function handleRegistration(ev) {
     ev.preventDefault();
@@ -17,7 +19,12 @@ const RegistrationPage = () => {
       body: JSON.stringify({ Name,email,contact,assignedProperties: assignProp}),
       headers: { "Content-Type": "application/json" },
     }).then((res)=>{
-      console.log(res);
+      if(res.ok) {
+        setName("");
+        setEmail("");
+        setContact("");
+        navigate("/");
+      }
     })
   }
 

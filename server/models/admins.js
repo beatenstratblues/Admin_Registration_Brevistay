@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Admins.init({
     uuid: {
       type:DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
     },
     Name: {
       type: DataTypes.STRING,
