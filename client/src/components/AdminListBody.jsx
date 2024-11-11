@@ -24,18 +24,6 @@ const AdminListBody = () => {
     adminFetch();
   }, []);
 
-  useEffect(() => {
-    async function searchByName() {
-      await fetch(`http://localhost:8000/api/admins/search?searchType=byname&searchQuery=${searchQuery}`).then((res) => {
-        if (res.ok) {
-          res.json().then((data) => {
-            setAdminData(data.admin_data);
-          });
-        }
-      });
-    }
-    searchByName();
-  },[byName])
 
   if (!adminData) {
     return <ShimmerPage />;
