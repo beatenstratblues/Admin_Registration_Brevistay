@@ -1,9 +1,9 @@
 const { properties, Admins } = require("../models");
-const { Op, where } = require("sequelize");
+const { Op } = require("sequelize");
 
 async function getAllAdminsData(req, res) {
   const { uuid } = req.query;
-  console.log("api active");
+
   try {
     if (uuid === "all") {
       const adminData = await Admins.findAll({
@@ -170,9 +170,79 @@ async function updateAdminDetails(req, res) {
   }
 }
 
+async function searchAdmin(req, res) {
+  const { searchType, searchQuery } = req.query;
+
+  if(searchType==="byName") {
+    try {
+      const adminData = await Admins.findAll({
+        where: {
+          Name: {
+            [Op.like]: `%${searchQuery}%`,
+          },
+        },
+      });
+      return res.json({
+        admin_Data: adminData,
+        message: "Search Results were found",
+        status: "Success",
+      });
+    } catch (err) {
+      return res.json({
+        message: "No results found",
+        status: "Fail",
+      });
+    }
+  }
+  else if(searchType==="byEmail") {
+    try {
+      const adminData = await Admins.findAll({
+        where: {
+          email: {
+            [Op.like]: `%${searchQuery}%`,
+          },
+        },
+      });
+      return res.json({
+        admin_Data: adminData,
+        message: "Search Results were found",
+        status: "Success",
+      });
+    } catch (err) {
+      return res.json({
+        message: "No results found",
+        status: "Fail",
+      });
+    }
+  }
+  else if(searchType==="byContact") {
+    try {
+      const adminData = await Admins.findAll({
+        where: {
+          contact: {
+            [Op.like]: `%${searchQuery}%`,
+          },
+        },
+      });
+      return res.json({
+        admin_Data: adminData,
+        message: "Search Results were found",
+        status: "Success",
+      });
+    } catch (err) {
+      return res.json({
+        message: "No results found",
+        status: "Fail",
+      });
+    }
+  }
+
+}
+
 module.exports = {
   getAllAdminsData,
   handleAdminRegistration,
   deletingRegisteredAdmin,
   updateAdminDetails,
+  searchAdmin,
 };
