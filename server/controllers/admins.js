@@ -1,5 +1,5 @@
 const { properties, Admins } = require("../models");
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 
 async function getAllAdminsData(req, res) {
   const { uuid } = req.query;
@@ -117,8 +117,62 @@ async function deletingRegisteredAdmin(req, res) {
   }
 }
 
+async function updateAdminDetails(req, res) {
+  const { uuid, Name, email, contact, updatedProperties } = req.body;
+
+  try {
+    await Admins.update(
+      { Name, email, contact },
+      {
+        where: {
+          uuid,
+        },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      message: "Failure to update the data, error in details",
+      status: "Fail",
+    });
+  }
+
+  try {
+    await properties.update(
+      { admin_id: null },
+      {
+        where: {
+          admin_id: uuid,
+        },
+      }
+    );
+
+    await properties.update(
+      { admin_id: uuid },
+      {
+        where: {
+          name: {
+            [Op.in]: updatedProperties,
+          },
+        },
+      }
+    );
+
+    return res.json({
+      message: "Admin Successfully Updated",
+      status: "Success",
+    });
+  } catch (err) {
+    return res.status(400).json({
+      message: "Failure to update the data, error in property selection",
+      status: "Fail",
+    });
+  }
+}
+
 module.exports = {
   getAllAdminsData,
   handleAdminRegistration,
-  deletingRegisteredAdmin
+  deletingRegisteredAdmin,
+  updateAdminDetails,
 };

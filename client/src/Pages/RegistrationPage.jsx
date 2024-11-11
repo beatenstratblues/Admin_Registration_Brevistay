@@ -9,6 +9,7 @@ const RegistrationPage = () => {
   const [email,setEmail] = useState();
   const [contact,setContact] = useState();
 
+
   const [assignProp,setAssignProp] = useState();
   const navigate = useNavigate();
 

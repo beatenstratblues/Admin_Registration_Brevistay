@@ -25,14 +25,12 @@ const PropertyViewPage = () => {
     return <ShimmerPage/>
   }
 
-  console.log(adminPropData);
-
   return (
     <div className='propViewPage'>
       <div className='propViewCont'>
         {
           adminPropData.map((x)=>{
-            return <PropertyViewElement property={x}/>
+            return <PropertyViewElement property={x} key={x.prop_id}/>
           })
         }
       </div>
