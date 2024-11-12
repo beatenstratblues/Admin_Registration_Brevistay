@@ -52,9 +52,9 @@ const RegistrationPage = () => {
     <div className='regis-page'>
         <form className='regisForm' onSubmit={handleRegistration}>
             <center><h1>Register Admin</h1></center>
-            <input type='text' placeholder='Name' value={Name} onChange={(e)=>{setName(e.target.value)}}required/>
-            <input type='text' placeholder='Email' value={email} onChange={(e)=>{setEmail(e.target.value)}}required/>
-            <input type='tel' placeholder='Contact' value={contact} onChange={(e)=>{setContact(e.target.value)}}required/>
+            <input type='text' placeholder='Name' value={Name} onChange={(e)=>{setName(e.target.value)}}  required/>
+            <input type='text' placeholder='Email' value={email} onChange={(e)=>{setEmail(e.target.value)}} required/>
+            <input type='tel' placeholder='Contact' value={contact} onChange={(e)=>{setContact(e.target.value)}} pattern="[0-9]{10}" required/>
             <Multiselect options={hotelOptions} isObject={false} onSelect={(e)=>{setAssignProp(e)}} onRemove={(e)=>{setAssignProp(e)}}/>
             <button type='submit'>Register Admin</button>
         </form>

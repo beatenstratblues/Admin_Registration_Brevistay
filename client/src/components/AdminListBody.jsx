@@ -12,18 +12,33 @@ const AdminListBody = () => {
   const [byTele, setByTele] = useState(false);
 
   useEffect(() => {
-    async function adminFetch() {
+    async function fetchAllAdmins() {
       await fetch("http://localhost:8000/api/admins?uuid=all").then((res) => {
-        if (res.ok) {
-          res.json().then((data) => {
-            setAdminData(data.admin_data);
-          });
-        }
+        res.json().then((data) => setAdminData(data.admin_data));
       });
     }
-    adminFetch();
+
+    fetchAllAdmins();
   }, []);
 
+  useEffect(() => {
+    if (!searchQuery) return;
+
+    async function searchAdmins() {
+      let searchType;
+      if (byName) searchType = "byName";
+      else if (byEmail) searchType = "byEmail";
+      else if (byTele) searchType = "byContact";
+
+      const url = `http://localhost:8000/api/admins/search?searchType=${searchType}&searchQuery=${searchQuery}`;
+
+      await fetch(url)
+        .then((res) => res.json())
+        .then((data) => setAdminData(data.admin_Data || []));
+    }
+
+    searchAdmins();
+  }, [searchQuery, byName, byEmail, byTele]);
 
   if (!adminData) {
     return <ShimmerPage />;

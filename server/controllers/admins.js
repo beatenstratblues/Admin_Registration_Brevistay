@@ -1,5 +1,6 @@
 const { properties, Admins } = require("../models");
 const { Op } = require("sequelize");
+const { emailValidation } = require("../utilities/admins");
 
 async function getAllAdminsData(req, res) {
   const { uuid } = req.query;
@@ -47,6 +48,8 @@ async function getAllAdminsData(req, res) {
 
 async function handleAdminRegistration(req, res) {
   const { Name, email, contact, assignedProperties } = req.body;
+
+  emailValidation(email,req,res);
 
   let recentlyAddedId;
 
@@ -238,6 +241,7 @@ async function searchAdmin(req, res) {
   }
 
 }
+
 
 module.exports = {
   getAllAdminsData,

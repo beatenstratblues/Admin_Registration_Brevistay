@@ -17,6 +17,8 @@ const SearchBar = ({ queryFunction, byName, byEmail, byTele }) => {
         className="EditButton"
         onClick={() => {
           byName.setByName(true);
+          byEmail.setByEmail(false);
+          byTele.setByTele(false);
         }}
       >
         Name
@@ -25,7 +27,9 @@ const SearchBar = ({ queryFunction, byName, byEmail, byTele }) => {
       <div
         className="EditButton"
         onClick={() => {
+          byName.setByName(false);
           byEmail.setByEmail(true);
+          byTele.setByTele(false);
         }}
       >
         Email
@@ -34,6 +38,8 @@ const SearchBar = ({ queryFunction, byName, byEmail, byTele }) => {
       <div
         className="EditButton"
         onClick={() => {
+          byName.setByName(false);
+          byEmail.setByEmail(false);
           byTele.setByTele(true);
         }}
       >
