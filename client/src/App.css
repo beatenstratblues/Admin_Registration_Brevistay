@@ -154,8 +154,9 @@ input {
 }
 
 select {
-  padding: 11px;
+  padding: 7px;
   border-radius: 5px;
+  font-size: 16px;
 }
 
 option {

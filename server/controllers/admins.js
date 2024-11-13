@@ -53,22 +53,14 @@ async function handleAdminRegistration(req, res) {
   const numValidationResult = await numberValidation(contact);
 
   
-  if(emailValidationResult && emailValidationResult.message==="in_use"){ /// compare with status other then message
-    return res.json(emailValidationResult);
-  }
-  else if(emailValidationResult && emailValidationResult.message==="wrong_format") {
-    return res.json(emailValidationResult);
-  }
-  else if(emailValidationResult && emailValidationResult.message==="Database_error") {
+  if(emailValidationResult && emailValidationResult.status==="Error"){ 
     return res.json(emailValidationResult);
   }
 
-  if(numValidationResult && numValidationResult.message==="invalid length"){ /// compare with status other then message
+  if(numValidationResult && numValidationResult.status==="Error"){ 
     return res.json(numValidationResult);
   }
-  else if(numValidationResult && numValidationResult.message==="in use") {
-    return res.json(numValidationResult);
-  }
+
 
   let recentlyAddedId;
 

@@ -6,7 +6,7 @@ async function emailValidation(email) {
   if (!emailPattern.test(email)) {
     return {
       message: "wrong_format",
-      status: "Fail",
+      status: "Error",
     };
   }
   try {
@@ -20,14 +20,14 @@ async function emailValidation(email) {
     if (emailData) {
       return {
         message: "in_use",
-        status: "Fail",
+        status: "Error",
       };
     }
   } catch (err) {
     console.log(err);
     return {
       message: "Database_error",
-      status: "Fail",
+      status: "Error",
     };
   }
 }
