@@ -1,6 +1,6 @@
 const { properties, Admins } = require("../models");
 const { Op } = require("sequelize");
-const { emailValidation } = require("../utilities/admins");
+const { emailValidation, numberValidation } = require("../utilities/admins");
 
 async function getAllAdminsData(req, res) {
   const { uuid } = req.query;
@@ -49,7 +49,26 @@ async function getAllAdminsData(req, res) {
 async function handleAdminRegistration(req, res) {
   const { Name, email, contact, assignedProperties } = req.body;
 
-  emailValidation(email,req,res);
+  const emailValidationResult = await emailValidation(email);
+  const numValidationResult = await numberValidation(contact);
+
+  
+  if(emailValidationResult && emailValidationResult.message==="in_use"){
+    return res.json(emailValidationResult);
+  }
+  else if(emailValidationResult && emailValidationResult.message==="wrong_format") {
+    return res.json(emailValidationResult);
+  }
+  else if(emailValidationResult && emailValidationResult.message==="Database_error") {
+    return res.json(emailValidationResult);
+  }
+
+  if(numValidationResult.message==="invalid length"){
+    return res.json(numValidationResult);
+  }
+  else if(numValidationResult.message==="in use") {
+    return res.json(numValidationResult);
+  }
 
   let recentlyAddedId;
 
@@ -80,6 +99,7 @@ async function handleAdminRegistration(req, res) {
       status: "Success",
     });
   } catch (err) {
+    console.log(err);
     return res.status(400).json({
       message: "Failure to post the data, error in property selection",
       status: "Fail",

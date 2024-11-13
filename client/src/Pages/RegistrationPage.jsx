@@ -15,6 +15,17 @@ const RegistrationPage = () => {
 
   async function handleRegistration(ev) {
     ev.preventDefault();
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if(!emailPattern.test(email)){
+      alert("The email format is wrong!");
+      return;
+    }
+    if(contact.length>10) {
+      alert("Invalid contact number length!");
+      return;
+    }
+
     await fetch("http://localhost:8000/api/admins", {
       method: "POST",
       body: JSON.stringify({ Name,email,contact,assignedProperties: assignProp}),
@@ -54,7 +65,7 @@ const RegistrationPage = () => {
             <center><h1>Register Admin</h1></center>
             <input type='text' placeholder='Name' value={Name} onChange={(e)=>{setName(e.target.value)}}  required/>
             <input type='text' placeholder='Email' value={email} onChange={(e)=>{setEmail(e.target.value)}} required/>
-            <input type='tel' placeholder='Contact' value={contact} onChange={(e)=>{setContact(e.target.value)}} pattern="[0-9]{10}" required/>
+            <input type='tel' placeholder='Contact' value={contact} onChange={(e)=>{setContact(e.target.value)}} required/>
             <Multiselect options={hotelOptions} isObject={false} onSelect={(e)=>{setAssignProp(e)}} onRemove={(e)=>{setAssignProp(e)}}/>
             <button type='submit'>Register Admin</button>
         </form>
