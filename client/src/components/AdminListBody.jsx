@@ -6,10 +6,7 @@ import ShimmerPage from "../Pages/ShimmerPage";
 const AdminListBody = () => {
   const [adminData, setAdminData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-
-  const [byName, setByName] = useState(false);
-  const [byEmail, setByEmail] = useState(false);
-  const [byTele, setByTele] = useState(false);
+  const [selectFilter, setSelectFilter] = useState("");
 
   useEffect(() => {
     async function fetchAllAdmins() {
@@ -25,12 +22,15 @@ const AdminListBody = () => {
     if (!searchQuery) return;
 
     async function searchAdmins() {
-      let searchType;
-      if (byName) searchType = "byName";
-      else if (byEmail) searchType = "byEmail";
-      else if (byTele) searchType = "byContact";
 
-      const url = `http://localhost:8000/api/admins/search?searchType=${searchType}&searchQuery=${searchQuery}`;
+      let searchType;
+      if (selectFilter==="Name") searchType = "byName";
+      else if (selectFilter==="Email") searchType = "byEmail";
+      else if (selectFilter==='Contact') searchType = "byContact";
+
+      console.log(searchType);
+
+      const url = `http://localhost:8000/api/admins/search?searchType=${searchType}&searchQuery=${searchQuery}`; //change filter type to drop down
 
       await fetch(url)
         .then((res) => res.json())
@@ -38,7 +38,7 @@ const AdminListBody = () => {
     }
 
     searchAdmins();
-  }, [searchQuery, byName, byEmail, byTele]);
+  }, [searchQuery]);
 
   if (!adminData) {
     return <ShimmerPage />;
@@ -48,9 +48,7 @@ const AdminListBody = () => {
     <div className="mainContent">
       <SearchBar
         queryFunction={{ searchQuery, setSearchQuery }}
-        byName={{ byName, setByName }}
-        byEmail={{ byEmail, setByEmail }}
-        byTele={{ byTele, setByTele }}
+        selectFilter={{selectFilter,setSelectFilter}}
       />
       <div>
         {adminData.map((ele) => {

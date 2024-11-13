@@ -19,7 +19,7 @@ app.use('/api/admins', adminRouter);
 app.use('/api/properties', propertyRouter);
 
 
-app.listen(8000, async () => {
+app.listen(process.env.PORT || 8000, async () => {
   console.log("Server Successfully connneted!!");
   await sequelize.authenticate();
   console.log("database connected!!");

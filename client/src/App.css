@@ -152,3 +152,12 @@ input {
   border: 1.3px solid var(--border-color);
   border-radius: 5px;
 }
+
+select {
+  padding: 11px;
+  border-radius: 5px;
+}
+
+option {
+  padding: 15px;
+}

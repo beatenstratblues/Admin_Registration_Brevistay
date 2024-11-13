@@ -1,6 +1,9 @@
 import React from "react";
 
-const SearchBar = ({ queryFunction, byName, byEmail, byTele }) => {
+const SearchBar = ({
+  queryFunction,
+  selectFilter,
+}) => {
   return (
     <div className="searchBar" style={{ marginBottom: 15 }}>
       <input
@@ -12,39 +15,19 @@ const SearchBar = ({ queryFunction, byName, byEmail, byTele }) => {
           queryFunction.setSearchQuery(e.target.value);
         }}
       />
-      &nbsp; &nbsp;
-      <div
-        className="EditButton"
-        onClick={() => {
-          byName.setByName(true);
-          byEmail.setByEmail(false);
-          byTele.setByTele(false);
+      &nbsp; &nbsp; &nbsp; &nbsp;
+      <label for="FilterDropDown">Search by : </label>
+      <select
+        id="FilterDropDown"
+        value={selectFilter.selectFilter}
+        onChange={(e) => {
+          selectFilter.setSelectFilter(e.target.value);
         }}
       >
-        Name
-      </div>
-      &nbsp; &nbsp;
-      <div
-        className="EditButton"
-        onClick={() => {
-          byName.setByName(false);
-          byEmail.setByEmail(true);
-          byTele.setByTele(false);
-        }}
-      >
-        Email
-      </div>
-      &nbsp; &nbsp;
-      <div
-        className="EditButton"
-        onClick={() => {
-          byName.setByName(false);
-          byEmail.setByEmail(false);
-          byTele.setByTele(true);
-        }}
-      >
-        Tele
-      </div>
+        <option value="Name">Name</option>
+        <option value="Email">Email</option>
+        <option value="Contact">Contact</option>
+      </select>
     </div>
   );
 };

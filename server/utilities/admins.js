@@ -58,7 +58,7 @@ async function numberValidation(number) {
     catch(err) {
         console.log(err);
         return {
-            message:"Database error",
+            message:"Some error occured",
             status:"Error"
         }
     }

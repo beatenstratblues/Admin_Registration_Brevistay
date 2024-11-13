@@ -53,7 +53,7 @@ async function handleAdminRegistration(req, res) {
   const numValidationResult = await numberValidation(contact);
 
   
-  if(emailValidationResult && emailValidationResult.message==="in_use"){
+  if(emailValidationResult && emailValidationResult.message==="in_use"){ /// compare with status other then message
     return res.json(emailValidationResult);
   }
   else if(emailValidationResult && emailValidationResult.message==="wrong_format") {
@@ -63,10 +63,10 @@ async function handleAdminRegistration(req, res) {
     return res.json(emailValidationResult);
   }
 
-  if(numValidationResult.message==="invalid length"){
+  if(numValidationResult && numValidationResult.message==="invalid length"){ /// compare with status other then message
     return res.json(numValidationResult);
   }
-  else if(numValidationResult.message==="in use") {
+  else if(numValidationResult && numValidationResult.message==="in use") {
     return res.json(numValidationResult);
   }
 
@@ -111,12 +111,6 @@ async function deletingRegisteredAdmin(req, res) {
   const uuid = req.params.id;
 
   try {
-    await Admins.destroy({
-      where: {
-        uuid,
-      },
-    });
-
     await properties.update(
       {
         admin_id: null,
@@ -127,6 +121,12 @@ async function deletingRegisteredAdmin(req, res) {
         },
       }
     );
+
+    await Admins.destroy({   
+      where: {
+        uuid,
+      },
+    });
 
     return res.json({
       message: "Record deleted successfully",
@@ -141,6 +141,7 @@ async function deletingRegisteredAdmin(req, res) {
 }
 
 async function updateAdminDetails(req, res) {
+
   const { uuid, Name, email, contact, updatedProperties } = req.body;
 
   try {
