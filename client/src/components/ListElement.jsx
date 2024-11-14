@@ -17,14 +17,13 @@ const ListElement = ({ elementData }) => {
 
   return (
     <div className="ListElement">
-      <div>{elementData.Name}</div>
-      <div>{elementData.email}</div>
-      <div>{elementData.contact}</div>
-      <div>
+      <div><span>{elementData.Name}</span></div>
+      <div><span>{elementData.email}</span></div>
+      <div><span>{elementData.contact}</span></div>
+      <div className="buttonSection">
         <div className="EditButton" onClick={()=>{
           navigate(`/update/${elementData.uuid}`)
         }}>Edit</div>
-        &nbsp; &nbsp;
         <div
           className="EditButton"
           onClick={() => {
@@ -33,7 +32,6 @@ const ListElement = ({ elementData }) => {
         >
           View
         </div>
-        &nbsp; &nbsp;
         <div className="EditButton" style={{ backgroundColor: "red" }} onClick={()=>{handleDelete(elementData.uuid)}}>
           Delete
         </div>

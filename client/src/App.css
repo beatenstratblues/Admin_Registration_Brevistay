@@ -46,14 +46,20 @@
 }
 
 .ListElement {
-  display: flex;
-  border:1px solid var(--border-color);
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   align-items: center;
+  gap: 40px;
+  border:1px solid var(--border-color);
   padding: 10px 60px;
   border-radius: 7px;
   width: 85vw;
   margin-bottom: 10px;
+}
+
+.ListElement div {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .EditButton {
@@ -161,4 +167,10 @@ select {
 
 option {
   padding: 15px;
+}
+
+.buttonSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 10px;
 }
