@@ -97,7 +97,7 @@ const RegistrationPage = () => {
             setContact(e.target.value);
           }}
           inputMode="numeric"
-          pattern="[0-9]*"
+          pattern="[0-9]+"
           required
         />
         <Multiselect
