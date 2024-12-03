@@ -5,7 +5,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   return (
     <div className="navbar">
-      <div>Admin Registration</div>
+      <div>Reso-Reserve</div>
       <div className="RegButton">
         <button onClick={()=>{navigate('/register')}}>Register new admin</button>
       </div>
