@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  frontend:
+    build: ./client
+    ports:
+      - "5173:5173"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  backend:
+    build: ./server
+    ports:
+      - "8080:8000"
+    environment:
+      - DB_HOST=database-1.cnos60oae9vg.us-east-1.rds.amazonaws.com
+      - DB_USER=root
+      - DB_PORT=3306
+      - DB_PASSWORD=rootpassword
+      - DB_NAME=Admin_Registration
+    healthcheck:
+          test: ["CMD", "curl", "-f", "http://localhost:8000/health"] 
+          interval: 10s       
+          timeout: 5s         
+          retries: 3         
+          start_period: 30s   

@@ -10,8 +10,10 @@ const AdminListBody = () => {
 
   useEffect(() => {
     async function fetchAllAdmins() {
-      await fetch("http://localhost:8000/api/admins?uuid=all").then((res) => {
-        res.json().then((data) => setAdminData(data.admin_data));
+      await fetch(`http://localhost:8080/api/admins?uuid=all`).then((res) => {
+        console.log("The API CALL BEING MADE");
+        res.json().then((data) => {
+          setAdminData(data.admin_data);});
       });
     }
 
@@ -30,7 +32,7 @@ const AdminListBody = () => {
 
       console.log(searchType);
 
-      const url = `http://localhost:8000/api/admins/search?searchType=${searchType}&searchQuery=${searchQuery}`; //change filter type to drop down
+      const url = `http://localhost:8080/api/admins/search?searchType=${searchType}&searchQuery=${searchQuery}`; //change filter type to drop down
 
       await fetch(url)
         .then((res) => res.json())

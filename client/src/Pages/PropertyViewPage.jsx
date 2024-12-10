@@ -10,7 +10,7 @@ const PropertyViewPage = () => {
 
   useEffect(()=>{
     async function adminFetch() {
-      await fetch(`http://localhost:8000/api/admins?uuid=${id}`).then(res=>{
+      await fetch(`http://localhost:8080/api/admins?uuid=${id}`).then(res=>{
         if(res.ok) {
           res.json().then(data=>{
             setAdminPropData(data.admin_data[0].properties);

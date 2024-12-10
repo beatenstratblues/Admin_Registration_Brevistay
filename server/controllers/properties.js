@@ -23,9 +23,9 @@ async function fetchPropertyData(req, res) {
       });
     }
   } catch (err) {
+    console.log(err);
     return (
-      res.status(400),
-      json({
+      res.status(400).json({
         message: "Failure to fetch the data",
         status: "Fail",
       })

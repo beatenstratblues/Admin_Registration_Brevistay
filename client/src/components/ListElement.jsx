@@ -5,7 +5,7 @@ const ListElement = ({ elementData }) => {
   const navigate = useNavigate();
 
   async function handleDelete(uuid) {
-    await fetch(`http://localhost:8000/api/admins/${uuid}`, {
+    await fetch(`http://localhost:8080/api/admins/${uuid}`, {
       method: "delete",
     }).then((res) => {
       if (res.ok) {
