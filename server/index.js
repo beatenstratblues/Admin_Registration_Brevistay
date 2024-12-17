@@ -10,7 +10,7 @@ const app = express();
 //middlewares
 
 app.use(express.json())
-app.use(cors({origin: "http://frontend:5173"}));
+app.use(cors({origin: true}));
 
 
 //routes
