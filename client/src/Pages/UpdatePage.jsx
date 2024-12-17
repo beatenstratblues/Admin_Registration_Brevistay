@@ -16,7 +16,7 @@ const UpdatePage = () => {
 
   async function handleUpdate(ev) {
     ev.preventDefault();
-    await fetch(`http://localhost:8080/api/admins/${id}`, {
+    await fetch(`http://Backend-lb-822102585.ap-south-1.elb.amazonaws.com/api/admins/${id}`, {
       method: "PUT",
       body: JSON.stringify({uuid:id, Name, email, contact, updatedProperties }),
       headers: { "Content-Type": "application/json" },
@@ -32,7 +32,7 @@ const UpdatePage = () => {
 
   useEffect(() => {
     async function adminFetch() {
-      await fetch(`http://localhost:8080/api/admins?uuid=${id}`).then((res) => {
+      await fetch(`http://Backend-lb-822102585.ap-south-1.elb.amazonaws.com/api/admins?uuid=${id}`).then((res) => {
         if (res.ok) {
           res.json().then((data) => {
             setAdminData(data);
@@ -45,7 +45,7 @@ const UpdatePage = () => {
       });
     }
     async function hotelPropertyDataFetch() {
-      await fetch("http://localhost:8080/api/properties/unadmin").then(
+      await fetch("http://Backend-lb-822102585.ap-south-1.elb.amazonaws.com/api/properties/unadmin").then(
         (response) => {
           if (response.ok) {
             response.json().then((data) => {

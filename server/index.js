@@ -28,7 +28,7 @@ app.use('/api/admins', adminRouter);
 app.use('/api/properties', propertyRouter);
 
 
-app.listen(process.env.PORT || 8000, async () => {
+app.listen(process.env.PORT || 8080, async () => {
   console.log("Server Successfully connneted!!");
   console.log("database connected!!");
 });

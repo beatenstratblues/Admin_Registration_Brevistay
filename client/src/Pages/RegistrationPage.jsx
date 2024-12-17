@@ -25,7 +25,7 @@ const RegistrationPage = () => {
       return;
     }
 
-    await fetch("http://localhost:8080/api/admins", {
+    await fetch("http://Backend-lb-822102585.ap-south-1.elb.amazonaws.com/api/admins", {
       method: "POST",
       body: JSON.stringify({
         Name,
@@ -46,7 +46,7 @@ const RegistrationPage = () => {
 
   useEffect(() => {
     async function hotelPropertyDataFetch() {
-      await fetch("http://localhost:8080/api/properties/unadmin").then(
+      await fetch("http://Backend-lb-822102585.ap-south-1.elb.amazonaws.com/api/properties/unadmin").then(
         (response) => {
           if (response.ok) {
             response.json().then((data) => {
